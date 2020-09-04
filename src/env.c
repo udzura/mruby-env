@@ -72,7 +72,7 @@ mrb_env_has_key(mrb_state *mrb, mrb_value self)
   key = mrb_str_to_cstr(mrb, name);
   if (getenv(key) != NULL) {
     return mrb_true_value();
-  } else { 
+  } else {
     return mrb_false_value();
   }
 }
@@ -201,7 +201,7 @@ mrb_env_aset(mrb_state *mrb, mrb_value self)
       mrb_raise(mrb, E_RUNTIME_ERROR, "can't delete environment variable");
     }
   } else {
-    mrb_convert_type(mrb, value, MRB_TT_STRING, "String", "to_str");
+    mrb_convert_type(mrb, value, MRB_TT_STRING, MRB_SYM(to_str));
     cvalue = mrb_string_value_cstr(mrb, &value);
     if (setenv(cname, cvalue, 1) != 0) {
       mrb_raise(mrb, E_RUNTIME_ERROR, "can't change environment variable");
